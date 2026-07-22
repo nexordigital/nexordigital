@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leads — Painel Nexor Digital</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/png" href="/assets/favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/admin/static/admin.css">
+</head>
+<body>
+
+<header class="topo">
+  <div class="topo__inner">
+    <div class="topo__marca">
+      <img src="/assets/logo-white.png" alt="Nexor Digital">
+      <span>Painel de Leads</span>
+    </div>
+    <div class="topo__acoes">
+      <span id="adminNome" class="topo__nome"></span>
+      <button id="btnSair" class="btn-fantasma">Sair</button>
+    </div>
+  </div>
+</header>
+
+<main class="painel">
+
+  <!-- ===== Dashboard ===== -->
+  <section class="cards-stats" id="stats" aria-label="Resumo dos leads">
+    <button class="stat" data-status=""><span class="stat__valor" id="st-total">–</span><span class="stat__label">Total de leads</span></button>
+    <button class="stat stat--novo" data-status="Novo"><span class="stat__valor" id="st-novo">–</span><span class="stat__label">Novos</span></button>
+    <button class="stat" data-status="Em contato"><span class="stat__valor" id="st-contato">–</span><span class="stat__label">Em contato</span></button>
+    <button class="stat" data-status="Qualificado"><span class="stat__valor" id="st-qualificado">–</span><span class="stat__label">Qualificados</span></button>
+    <button class="stat" data-status="Reunião agendada"><span class="stat__valor" id="st-reuniao">–</span><span class="stat__label">Reunião agendada</span></button>
+    <button class="stat stat--cliente" data-status="Cliente"><span class="stat__valor" id="st-cliente">–</span><span class="stat__label">Clientes</span></button>
+    <button class="stat stat--perdido" data-status="Não convertido"><span class="stat__valor" id="st-nao">–</span><span class="stat__label">Não convertidos</span></button>
+  </section>
+
+  <!-- ===== Filtros ===== -->
+  <section class="filtros">
+    <input type="search" id="fBusca" placeholder="Buscar por nome, empresa ou WhatsApp…">
+    <select id="fStatus">
+      <option value="">Todos os status</option>
+      <option>Novo</option><option>Em contato</option><option>Qualificado</option>
+      <option>Reunião agendada</option><option>Cliente</option><option>Não convertido</option>
+    </select>
+    <input type="text" id="fSegmento" placeholder="Segmento">
+    <input type="date" id="fDe" title="De">
+    <input type="date" id="fAte" title="Até">
+    <select id="fOrdem">
+      <option value="recentes">Mais recentes</option>
+      <option value="antigos">Mais antigos</option>
+    </select>
+    <button id="btnLimpar" class="btn-fantasma">Limpar</button>
+  </section>
+
+  <!-- ===== Tabela ===== -->
+  <section class="tabela-wrap">
+    <table class="tabela" id="tabela">
+      <thead>
+        <tr>
+          <th>Nome</th><th>WhatsApp</th><th>Empresa</th><th>Segmento</th>
+          <th>Cidade/UF</th><th>Cadastro</th><th>Status</th><th></th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+    <p class="tabela-vazia" id="vazio" hidden>Nenhum lead encontrado com esses filtros.</p>
+  </section>
+</main>
+
+<!-- ===== Modal de detalhes ===== -->
+<div class="modal-fundo" id="modalFundo" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitulo">
+    <button class="modal__fechar" id="modalFechar" aria-label="Fechar">×</button>
+    <h2 id="modalTitulo">Detalhes do lead</h2>
+    <div class="modal__grade" id="modalDados"></div>
+
+    <div class="modal__acoes">
+      <label for="modalStatus">Status:</label>
+      <select id="modalStatus">
+        <option>Novo</option><option>Em contato</option><option>Qualificado</option>
+        <option>Reunião agendada</option><option>Cliente</option><option>Não convertido</option>
+      </select>
+      <a id="modalWhats" class="btn-whats" target="_blank" rel="noopener">Abrir conversa no WhatsApp</a>
+    </div>
+
+    <h3>Observações internas</h3>
+    <div class="modal__obs-form">
+      <textarea id="obsTexto" rows="2" placeholder="Ex.: Entrou em contato, possui clínica e investe R$ 3 mil/mês."></textarea>
+      <button id="btnObs">Adicionar</button>
+    </div>
+    <ul class="modal__obs-lista" id="obsLista"></ul>
+
+    <h3>Histórico de status</h3>
+    <ul class="modal__hist" id="histLista"></ul>
+  </div>
+</div>
+
+<script src="/admin/static/admin.js"></script>
+</body>
+</html>
