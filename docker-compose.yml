@@ -1,0 +1,11 @@
+services:
+  nexor:
+    build: .
+    container_name: nexor-digital
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data   # banco SQLite fica fora do container (persiste em updates)
